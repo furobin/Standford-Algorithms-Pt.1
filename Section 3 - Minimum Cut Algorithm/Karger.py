@@ -108,34 +108,3 @@ v = {1 : [2,4,5],
      5 : [1,3,4]}
 
 tg = Graph(v)
-
-
-#%% Trash
-
-class Vert:
-    def __init__(self, ID, edges = []):
-        self.ID = ID
-        self.edges = edges
-    
-    @classmethod
-    def contraction(cls, vert1, vert2):
-        edges = [edge for vert in [vert1, vert2]
-                      for edge in vert.edges
-                      if edge not in [vert1.id, vert2.id]]
-        return cls(min([vert1.id, vert2.id]), edges)
-    
-    def __eq__(self, other):
-        return self.ID == other.ID
-    
-    def __lt__(self, other):
-        return self.ID < other.ID
-    
-class Edge:
-    def __init__(self, verts):
-        self.verts = verts 
-        
-    def __eq__(self, other):
-        return sorted(self.verts) == sorted(other.verts)
-    
-    def __repr__(self):
-        return f'{self.verts[0]}, {self.verts[1]} |'
